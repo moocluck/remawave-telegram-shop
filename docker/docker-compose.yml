@@ -1,0 +1,18 @@
+services:
+  remnawave-telegram-bot:
+    image: remnawave-telegram-bot
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: remnawave-telegram-bot
+    volumes:
+      - ../app:/var/www/html
+    ports:
+      - "8000:8000"
+      - "9000:9000"
+    networks:
+      - remnawave-telegram-bot-network
+
+networks:
+  remnawave-telegram-bot-network:
+    driver: bridge
