@@ -8,8 +8,20 @@ services:
     volumes:
       - ../app:/var/www/html
     ports:
-      - "8000:8000"
       - "9000:9000"
+    networks:
+      - remnawave-telegram-bot-network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-container
+    ports:
+      - "8080:80"  
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ../app/public:/var/www/html/public
+    depends_on:
+      - remnawave-telegram-bot
     networks:
       - remnawave-telegram-bot-network
 
